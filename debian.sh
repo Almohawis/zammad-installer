@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 git clone https://github.com/zammad/zammad-docker-compose.git
 cd zammad-docker-compose
