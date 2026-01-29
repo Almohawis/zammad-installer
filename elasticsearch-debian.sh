@@ -11,7 +11,7 @@ curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | \
 gpg --dearmor | tee /etc/apt/trusted.gpg.d/elasticsearch.gpg> /dev/null \
 && chmod 644 /etc/apt/trusted.gpg.d/elasticsearch.gpg
 apt update
-apt install elasticsearch
+apt install elasticsearch -y
 /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
 sysctl -w vm.max_map_count=262144
 
