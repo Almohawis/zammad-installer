@@ -10,6 +10,8 @@ Ubuntu 24.04  [3]
 read -p "==>" op
 
 if [[ "$op" == "1" ]]; then
+    mkdir -p /etc/apt/keyrings
+    apt install curl coreutils  apt-transport-https gnupg -y
     curl -fsSL https://dl.packager.io/srv/zammad/zammad/key | \
    gpg --dearmor | sudo tee /etc/apt/keyrings/pkgr-zammad.gpg> /dev/null \
    && sudo chmod 644 /etc/apt/keyrings/pkgr-zammad.gpg
@@ -24,6 +26,8 @@ if [[ "$op" == "1" ]]; then
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
 elif [[ "$op" == "2" ]]; then
+    mkdir -p /etc/apt/keyrings
+    apt install curl coreutils  apt-transport-https gnupg -y
    curl -fsSL https://dl.packager.io/srv/zammad/zammad/key | \
    gpg --dearmor | sudo tee /etc/apt/keyrings/pkgr-zammad.gpg> /dev/null \
    && sudo chmod 644 /etc/apt/keyrings/pkgr-zammad.gpg
@@ -37,6 +41,8 @@ elif [[ "$op" == "2" ]]; then
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
 elif [[ "$op" == "3" ]]; then
+    mkdir -p /etc/apt/keyrings
+    apt install curl coreutils  apt-transport-https gnupg -y
    curl -fsSL https://dl.packager.io/srv/zammad/zammad/key | \
    gpg --dearmor | sudo tee /etc/apt/keyrings/pkgr-zammad.gpg> /dev/null \
    && sudo chmod 644 /etc/apt/keyrings/pkgr-zammad.gpg
