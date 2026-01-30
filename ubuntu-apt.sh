@@ -23,6 +23,8 @@ if [[ "$op" == "1" ]]; then
    curl http://localhost:9200
    echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+   systemctl status postgresql
+   echo "If postgresql Is Active , Continue"
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
 elif [[ "$op" == "2" ]]; then
@@ -39,6 +41,8 @@ elif [[ "$op" == "2" ]]; then
    curl http://localhost:9200
    echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+   systemctl status postgresql
+   echo "If postgresql Is Active , Continue"
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
 elif [[ "$op" == "3" ]]; then
@@ -55,6 +59,8 @@ elif [[ "$op" == "3" ]]; then
    curl http://localhost:9200
    echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+   systemctl status postgresql
+   echo "If postgresql Is Active , Continue"
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
 else

@@ -23,9 +23,11 @@ if [[ "$op" == "1" ]]; then
    curl http://localhost:9200
    echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+   systemctl status postgresql
+   echo "If postgresql Is Active , Continue"
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
-
+   
 elif [[ "$op" == "2" ]]; then
     mkdir -p /etc/apt/keyrings
     apt install curl coreutils  apt-transport-https gnupg -y
@@ -40,6 +42,8 @@ elif [[ "$op" == "2" ]]; then
    curl http://localhost:9200
    echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+   systemctl status postgresql
+   echo "If postgresql Is Active , Continue"
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
 else
