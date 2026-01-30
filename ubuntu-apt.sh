@@ -35,7 +35,8 @@ elif [[ "$op" == "2" ]]; then
    sudo tee /etc/apt/sources.list.d/zammad.list > /dev/null	
    sudo apt update
    sudo apt install zammad -y
-   zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+      zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+   curl http://localhost:9200
    echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
    systemctl status zammad
@@ -51,6 +52,7 @@ elif [[ "$op" == "3" ]]; then
    sudo apt update
    sudo apt install zammad -y
    zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+   curl http://localhost:9200
    echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
    systemctl status zammad
