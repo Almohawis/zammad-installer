@@ -11,7 +11,7 @@ enabled=1
 autorefresh=1
 type=rpm-md"| tee /etc/yum.repos.d/elasticsearch-7.x.repo
 dnf install -y elasticsearch
-/usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
+/usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment -y
 sysctl -w vm.max_map_count=262144
 
 echo "# /etc/elasticsearch/elasticsearch.yml
@@ -33,6 +33,6 @@ http.max_content_length: 400mb
 #
 # Available in version 6.6+ only.
 indices.query.bool.max_clause_count: 2000" | tee -a /etc/elasticsearch/elasticsearch.yml
-firewall-cmd --permanent --add-port=9200
+firewall-cmd --permanent --add-port=9200/tcp
 firewall-cmd --reload
 systemctl enable --now elasticsearch
