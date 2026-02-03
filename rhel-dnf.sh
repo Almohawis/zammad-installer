@@ -42,11 +42,18 @@ elif [[ "$op" == "2" ]]; then
     rpm --import https://dl.packager.io/srv/zammad/zammad/key
     wget -O /etc/yum.repos.d/zammad.repo \
     https://dl.packager.io/srv/zammad/zammad/stable/installer/el/9.repo
-    sudo mkdir -p /var/run/postgresql
-    sudo chown postgres:postgres /var/run/postgresql
-    sudo chmod 775 /var/run/postgresql
+    dnf install -y postgresql-server postgresql-contrib
+    postgresql-setup --initdb
+    systemctl enable --now postgresql
+    mkdir -p /var/run/postgresql
+    chown postgres:postgres /var/run/postgresql
+    chmod 775 /var/run/postgresql
     dnf install zammad -y
     chmod -R 755 /opt/zammad/public/
+    systemctl start postgresql 
+    cp /opt/zammad/contrib/nginx/zammad.conf /etc/nginx/conf.d/zammad.conf
+    usermod -a -G zammad nginx
+    systemctl restart nginx.service
     # SELinux
     chcon -Rv --type=httpd_sys_content_t /opt/zammad/public/
     setsebool httpd_can_network_connect on -P
@@ -64,6 +71,9 @@ elif [[ "$op" == "2" ]]; then
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
    systemctl status postgresql
    echo "If postgresql Is Active , Continue"
+   systemctl status nginx
+   echo "If nginx Is Active , Continue"
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
+   echo "Please Edit /etc/nginx/ Files (/etc/nginx/nginx.conf) Change The Port \ For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"
 fi
