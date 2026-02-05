@@ -66,14 +66,21 @@ elif [[ "$op" == "2" ]]; then
     firewall-cmd --reload
     # 
    zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+   echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
    curl http://localhost:9200
    echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
    systemctl status postgresql
+   echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
    echo "If postgresql Is Active , Continue"
    systemctl status nginx
+   echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
    echo "If nginx Is Active , Continue"
    systemctl status zammad
+   echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
    echo "If zammad Is Active , Install Done"
-   echo "Please Edit /etc/nginx/ Files (/etc/nginx/nginx.conf) Change The Port \ For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"
+   echo """@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Please Edit /etc/nginx/ Files 
+(/etc/nginx/nginx.conf) Change The Port
+For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"""
 fi
