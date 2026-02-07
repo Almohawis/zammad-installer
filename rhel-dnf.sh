@@ -36,8 +36,11 @@ dnf install wget epel-release -y
     restorecon -Rv /opt/zammad/public/
     chmod -R a+r /opt/zammad/public/
     # Firewall
+    echo "Open Port 80"
     firewall-cmd --zone=public --add-service=http --permanent
+    echo "Open Port 5432"
     firewall-cmd --zone=public --add-port=5432/tcp --permanent
+    echo "Reload Firewall"
     firewall-cmd --reload
     # 
    zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
@@ -84,8 +87,11 @@ elif [[ "$op1" == "2" ]]; then
     restorecon -Rv /opt/zammad/public/
     chmod -R a+r /opt/zammad/public/
     # Firewall
+    echo "Open Port 80"
     firewall-cmd --zone=public --add-service=http --permanent
+    echo "Open Port 5432"
     firewall-cmd --zone=public --add-port=5432/tcp --permanent
+    echo "Reload Firewall"
     firewall-cmd --reload
     # 
    zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
@@ -108,23 +114,6 @@ Please Edit /etc/nginx/ Files
 For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"""
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 elif [[ "$op1" == "3" ]]; then
 	echo "Agre With Install (git , podman) ?
 Yes [1]
@@ -142,7 +131,9 @@ No & Exit [2]"
 			if [[ "$(id -u)" -eq 0 ]]; then
 				echo "You Can Run Podman Ander Port 1024 Becose You Are Root"
 				sysctl net.ipv4.ip_unprivileged_port_start=$Port
+                echo "Open Port $Port"
                 firewall-cmd --permanent --add-port=$Port/tcp
+                echo "Reload Firewall"
                 firewall-cmd --reload
                 PodmanInstaller
                 loginctl enable-linger $USER
@@ -161,9 +152,13 @@ No & Exit (2)"
             if [[ "$op3" == "1" ]]; then
             echo "Contaner Port is 7070 \ But Will Forward To Port $Port"
             sleep 3
+            echo "Open Port 7070"
             sudo firewall-cmd --add-port=7070/tcp --permanent
+            echo "Open Port $Port"
             sudo firewall-cmd --add-port=$Port/tcp --permanent
+            echo "Foreard Port $Port To 7070"
             sudo firewall-cmd --add-forward-port=port=$Port:proto=tcp:toport=7070 --permanent
+            echo "Reload Firewall"
             sudo firewall-cmd --reload
             PodmanInstallerNonRoot
             loginctl enable-linger $USER
