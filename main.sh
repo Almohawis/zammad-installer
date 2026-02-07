@@ -9,8 +9,8 @@ By: @ALmohawis
 Debian (1)
 Ubuntu (2)
 RHEL & ALmaLinux (3)
-Docker (4)
-Podman (5)
+Podman (4)
+Docker (5)
 
 '''
 
@@ -111,7 +111,12 @@ elif [[ "$OP1" == "3" ]]; then
     echo "Exit"
     exit
   fi
-# elif [[]]
+elif [[ "$OP1" == "4" ]]; then
+  source ./func/rhel-dnf.sh
+   # For Edit ./func/rhel-dnf.sh
+   PodmanRH
+
+
 # elif [[]]
 
 
