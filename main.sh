@@ -83,7 +83,34 @@ Exit (4)
   fi
 
 
-# elif [[]]
+elif [[ "$OP1" == "3" ]]; then
+  echo "
+  RHEL\CentOS\AlmaLinux 8 [1]
+  RHEL\CentOS\AlmaLinux 9 [2]
+  RHEL\CentOS\AlmaLinux 10 <With Podman> [3]
+  "
+  source ./func/elasticsearch-rhel.sh
+  source ./func/rhel-dnf.sh
+
+  read -p "==>" OP2
+  if [[ "$OP2" == "1" ]]; then
+    # For Edit ./func/elasticsearch-rhel.sh
+    InstallElasticsearchRH
+    # For Edit ./func/rhel-dnf.sh
+    RHAL8Installer
+  elif [[ "$OP2" == "2" ]]; then
+    # For Edit ./func/elasticsearch-rhel.sh
+    InstallElasticsearchRH
+    # For Edit ./func/rhel-dnf.sh
+    RHAL9Installer
+  elif [[ "$OP2" == "3" ]]; then
+    # For Edit ./func/rhel-dnf.sh
+    PodmanRH
+
+  else
+    echo "Exit"
+    exit
+  fi
 # elif [[]]
 # elif [[]]
 

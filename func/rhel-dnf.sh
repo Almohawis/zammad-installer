@@ -1,18 +1,7 @@
 #!/bin/bash
 
-echo """
-
-RHEL\CentOS\AlmaLinux 8 [1]
-RHEL\CentOS\AlmaLinux 9 [2]
-RHEL\CentOS\AlmaLinux 10 <Using podman> [3]
-
-"""
-
-
-read -p "==>" op1
-
 # RHEL\AlmaLinux 8
-if [[ "$op1" == "1" ]]; then
+RHAL8Installer() {
 dnf install wget epel-release -y
     rpm --import https://dl.packager.io/srv/zammad/zammad/key
     wget -O /etc/yum.repos.d/zammad.repo \
@@ -61,9 +50,9 @@ dnf install wget epel-release -y
 Please Edit /etc/nginx/ Files 
 If You Want zammad Using Port 80 PleaseChange The Port From 80 To Any Port Else In (/etc/nginx/nginx.conf)
 For Change Zammad Port (/etc/nginx/conf.d/zammad.conf)"""
-
+}
 # RHEL\AlmaLinux 9
-elif [[ "$op1" == "2" ]]; then
+RHAL9Installer() {
     dnf install wget epel-release -y
     rpm --import https://dl.packager.io/srv/zammad/zammad/key
     wget -O /etc/yum.repos.d/zammad.repo \
@@ -112,25 +101,27 @@ elif [[ "$op1" == "2" ]]; then
 Please Edit /etc/nginx/ Files 
 (/etc/nginx/nginx.conf) Change The Port
 For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"""
+}
 
-
-elif [[ "$op1" == "3" ]]; then
+PodmanRH() {
 	echo "Agree With Install (git , podman) ?
 Yes [1]
 No & Exit [2]"
 
 	read -p "==>" op2
 	if [[ "$op2" == "1" ]]; then
-    source ./podman-func.sh
+    source ./func/podman-func.sh
 	sudo dnf update 
     sudo dnf install epel-release podman -y
-    sudo dnf install podman-compose git -y
+    sudo dnf install podman-compose git firewalld -y
+    sudo systemctl enable --now firewalld
 		echo "Zammad Port? (http=80 But Check If There Is Any Service Using This Port + Run The Script By Root Or It Will Forward The Port) :"
 		read -p "===>" Port
 		if [[ $Port -le 1024 ]]; then
 			if [[ "$(id -u)" -eq 0 ]]; then
 				echo "You Can Run Podman Under Port 1024 Because You Are Root"
 				sysctl net.ipv4.ip_unprivileged_port_start=$Port
+
                 echo "Open Port $Port"
                 firewall-cmd --permanent --add-port=$Port/tcp
                 echo "Reload Firewall"
@@ -176,4 +167,4 @@ No & Exit (2)"
 		echo "Cannot Install zammad Without (git, podman)"
 		exit	
 	fi
-fi
+}

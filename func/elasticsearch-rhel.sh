@@ -1,5 +1,6 @@
 #!/bin/bash
-
+InstallElasticsearchRH() {
+    dnf update
 dnf install wget epel-release -y
 rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 echo "[elasticsearch-7.x]
@@ -36,3 +37,4 @@ indices.query.bool.max_clause_count: 2000" | tee -a /etc/elasticsearch/elasticse
 firewall-cmd --permanent --add-port=9200/tcp
 firewall-cmd --reload
 systemctl enable --now elasticsearch
+}

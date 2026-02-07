@@ -51,7 +51,7 @@ mkdir -p ~/.config/systemd/user/
                 WantedBy=default.target""" | tee ~/.config/systemd/user/zammad.service
                 systemctl --user daemon-reload
                 systemctl --user enable --now zammad.service
-				echo "Please Wate , Zammad Service Is Loaded"
+				echo "Please Wait , Zammad Service Is Loaded"
 		while [ "$(systemctl is-active --user zammad.service)" != "active" ]; do
 		  sleep 5 
 		done
