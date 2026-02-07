@@ -9,10 +9,10 @@ RHEL\CentOS\AlmaLinux 10 <Using podman> [3]
 """
 
 
-read -p "==>" op
+read -p "==>" op1
 
 # RHEL\AlmaLinux 8
-if [[ "$op" == "1" ]]; then
+if [[ "$op1" == "1" ]]; then
 dnf install wget epel-release -y
     rpm --import https://dl.packager.io/srv/zammad/zammad/key
     wget -O /etc/yum.repos.d/zammad.repo \
@@ -60,7 +60,7 @@ Please Edit /etc/nginx/ Files
 For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"""
 
 # RHEL\AlmaLinux 9
-elif [[ "$op" == "2" ]]; then
+elif [[ "$op1" == "2" ]]; then
     dnf install wget epel-release -y
     rpm --import https://dl.packager.io/srv/zammad/zammad/key
     wget -O /etc/yum.repos.d/zammad.repo \
@@ -106,4 +106,79 @@ elif [[ "$op" == "2" ]]; then
 Please Edit /etc/nginx/ Files 
 (/etc/nginx/nginx.conf) Change The Port
 For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+elif [[ "$op1" == "3" ]]; then
+	echo "Agre With Install (git , podman) ?
+Yes [1]
+No & Exit [2]"
+
+	read -p "==>" op2
+	if [[ "$op2" == "1" ]]; then
+    source ./podman-func.sh
+	sudo dnf update 
+    sudo dnf install epel-release podman -y
+    sudo dnf install podman-compose git -y
+		echo "Zammad Port? (http=80 But Check If There Any Service Using This Port + Run The Script By Root) :"
+		read -p "===>" Port
+		if [[ $Port -le 1024 ]]; then
+			if [[ "$(id -u)" -eq 0 ]]; then
+				echo "You Can Run Podman Ander Port 1024 Becose You Are Root"
+				sysctl net.ipv4.ip_unprivileged_port_start=$Port
+                firewall-cmd --permanent --add-port=$Port/tcp
+                firewall-cmd --reload
+                PodmanInstaller
+                loginctl enable-linger $USER
+                PSDroot
+                echo "*** Finsh ***"
+                exit
+			else
+
+            echo "Cannot Run Podman Ander Port 1024 Becose You Are Not Root
+But You Can Forward Port
+Yes (1)
+No & Exit (2)"     
+            fi
+
+            read -p "==>" op3
+            if [[ "$op3" == "1" ]]; then
+            echo "Contaner Port is 7070 \ But Will Forward To Port $Port"
+            sleep 3
+            sudo firewall-cmd --add-port=7070/tcp --permanent
+            sudo firewall-cmd --add-port=$Port/tcp --permanent
+            sudo firewall-cmd --add-forward-port=port=$Port:proto=tcp:toport=7070 --permanent
+            sudo firewall-cmd --reload
+            PodmanInstallerNonRoot
+            loginctl enable-linger $USER
+	    PSD
+	   		
+            else
+                echo "exit"
+                exit
+            fi
+
+		fi
+
+	
+	else
+		echo "Cannot Install zammad Without (git, podman)"
+		exit	
+	fi
 fi
