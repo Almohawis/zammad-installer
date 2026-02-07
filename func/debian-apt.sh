@@ -1,15 +1,10 @@
 #!/bin/bash
 
-echo "
 
-Debian 11 [1]
-Debian 12 [2]
-"
 
-read -p "==>" op
-
-if [[ "$op" == "1" ]]; then
+Debian11Installer() {
     mkdir -p /etc/apt/keyrings
+    apt update
     apt install curl coreutils  apt-transport-https gnupg -y
     curl -fsSL https://dl.packager.io/srv/zammad/zammad/key | \
    gpg --dearmor | sudo tee /etc/apt/keyrings/pkgr-zammad.gpg> /dev/null \
@@ -27,9 +22,11 @@ if [[ "$op" == "1" ]]; then
    echo "If postgresql Is Active , Continue"
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
-   
-elif [[ "$op" == "2" ]]; then
+   exit
+}
+Debian12Installer() {
     mkdir -p /etc/apt/keyrings
+    apt update
     apt install curl coreutils  apt-transport-https gnupg -y
     curl -fsSL https://dl.packager.io/srv/zammad/zammad/key | \
    gpg --dearmor | sudo tee /etc/apt/keyrings/pkgr-zammad.gpg> /dev/null \
@@ -46,8 +43,5 @@ elif [[ "$op" == "2" ]]; then
    echo "If postgresql Is Active , Continue"
    systemctl status zammad
    echo "If zammad Is Active , Install Done"
-else
-    echo "Error"
-    exit 0
-
-fi
+   exit
+}

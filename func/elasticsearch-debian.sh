@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# 1
+InstallElasticsearch(){
+apt update
 apt install curl apt-transport-https gnupg -y
 
-# 2 Elasticsearch
+
 apt install apt-transport-https sudo wget curl gnupg -y
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/elasticsearch.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main"| \
   tee -a /etc/apt/sources.list.d/elastic-7.x.list > /dev/null
@@ -36,5 +37,5 @@ http.max_content_length: 400mb
 # Available in version 6.6+ only.
 indices.query.bool.max_clause_count: 2000 " | tee -a /etc/elasticsearch/elasticsearch.yml
 systemctl enable --now elasticsearch
-
+}
 
