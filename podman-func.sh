@@ -22,7 +22,7 @@ git clone https://github.com/zammad/zammad-docker-compose.git
 cd zammad-docker-compose
 cp .env.dist .env
 echo "NGINX_EXPOSE_PORT=7070
-NGINX_PORT=7070" | tee -a .env
+NGINX_PORT=8080" | tee -a .env
 echo "
 ***********
 * Please Select ( docker.io ) Or If You Using RHEL Slecet ( registry.access.redhat.com ) Or ( registry.redhat.io )
