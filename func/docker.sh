@@ -1,5 +1,41 @@
 #!/bin/bash
 
+# IsThereDocker(){
+#     echo "Do You Install Docker?
+# Yes (1)
+# No, Install Docker (2)
+# Exit (3)
+# "
+# read -p "==>" OP
+# if [[ "$OP" == "1" ]]; then
+#     echo "Ok, Continue"
+# elif [[ "$OP" == "2" ]]; then
+#     username=$(whoami)
+#     echo "Debian (1)
+# RedHat (2)
+# Exit (3)"
+#     read -p "==>" OP2
+#     if [[ "$OP2" == "1" ]]; then
+#     sudo apt update
+#     sudo apt install docker.io docker-compose -y
+#     sudo usermod -aG docker $username
+#     echo "********************
+# Please Enter <exit> Command
+# ********************"
+#     newgrp docker 
+#     # elif
+#     else
+#     echo "Exit"
+#     exit
+#     fi
+    
+# else
+#     echo "Exit"
+#     exit
+
+# fi
+# }
+
 DockerDownload() {
 git clone https://github.com/zammad/zammad-docker-compose.git
 cd zammad-docker-compose

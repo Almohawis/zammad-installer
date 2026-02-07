@@ -93,6 +93,7 @@ elif [[ "$OP1" == "3" ]]; then
   source ./func/rhel-dnf.sh
 
   read -p "==>" OP2
+  
   if [[ "$OP2" == "1" ]]; then
     # For Edit ./func/elasticsearch-rhel.sh
     InstallElasticsearchRH
@@ -120,6 +121,7 @@ elif [[ "$OP1" == "4" ]]; then
 elif [[ "$OP1" == "5" ]]; then
   #For Edit ./fucn/docker.sh
   source ./func/docker.sh
+  # IsThereDocker
   DockerDownload
 
 
