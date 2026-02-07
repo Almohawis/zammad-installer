@@ -1,6 +1,6 @@
 #!/bin/bash
 InstallElasticsearchRH() {
-    dnf update
+    dnf update -y
 dnf install wget epel-release -y
 rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
 echo "[elasticsearch-7.x]

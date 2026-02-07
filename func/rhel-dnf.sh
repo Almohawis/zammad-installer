@@ -111,7 +111,7 @@ No & Exit [2]"
 	read -p "==>" op2
 	if [[ "$op2" == "1" ]]; then
     source ./func/podman-func.sh
-	sudo dnf update 
+	sudo dnf update -y
     sudo dnf install epel-release podman -y
     sudo dnf install podman-compose git firewalld -y
     sudo systemctl enable --now firewalld
