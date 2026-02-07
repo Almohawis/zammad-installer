@@ -51,10 +51,36 @@ If You Want zammad Using Another Port Edit /etc/nginx/sites-enabled/zammad.conf"
   fi
 ########################## DEBIAN
 
-# elif [[ "$OP1" == "2" ]]; then
-#   source ./func/elasticsearch-debian.sh
-# source ./func/
+elif [[ "$OP1" == "2" ]]; then
+  source ./func/elasticsearch-debian.sh
+  source ./func/ubuntu-apt.sh
+  echo "
 
+Ubuntu 20.04  [1]
+Ubuntu 22.04  [2]
+Ubuntu 24.04  [3]
+Exit (4)
+"
+  read -p "==>" OP2
+  if [[ "$OP2" == "1" ]]; then
+    # For Edit ./func/elasticsearch-debian.sh
+    InstallElasticsearch
+    # For Edit ./func/ubuntu-apt.sh
+    Ubuntu20Installer
+  elif [[ "$OP2" == "2" ]]; then
+    # For Edit ./func/elasticsearch-debian.sh
+    InstallElasticsearch
+    # For Edit ./func/ubuntu-apt.sh
+    Ubuntu22Installer
+    elif [[ "$OP2" == "3" ]]; then
+    # For Edit ./func/elasticsearch-debian.sh
+    InstallElasticsearch
+    # For Edit ./func/ubuntu-apt.sh
+    Ubuntu24Installer
+  else
+    echo "Exit"
+    exit
+  fi
 
 
 # elif [[]]
