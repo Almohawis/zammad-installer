@@ -40,7 +40,7 @@ elif [[ "$op" == "2" ]]; then
    sudo apt install zammad -y
    zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
    curl http://localhost:9200
-   echo "If The Output is \"Failed to connect\" Please Run \" systemctl status elasticsearch.service \" \"sudo systemctl start elasticsearch.service \""
+   echo "If The Output Is "Failed to connect" Please Run "systemctl status elasticsearch.service" "sudo systemctl start elasticsearch.service" \""
    echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
    systemctl status postgresql
    echo "If postgresql Is Active , Continue"

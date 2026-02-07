@@ -59,8 +59,8 @@ dnf install wget epel-release -y
    echo "If zammad Is Active , Install Done"
    echo """@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Please Edit /etc/nginx/ Files 
-(/etc/nginx/nginx.conf) Change The Port
-For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"""
+If You Want zammad Using Port 80 PleaseChange The Port From 80 To Any Port Else In (/etc/nginx/nginx.conf)
+For Change Zammad Port (/etc/nginx/conf.d/zammad.conf)"""
 
 # RHEL\AlmaLinux 9
 elif [[ "$op1" == "2" ]]; then
@@ -115,7 +115,7 @@ For Change Zammad Port (/etc/nginx/conf.d/zammad.conf"""
 
 
 elif [[ "$op1" == "3" ]]; then
-	echo "Agre With Install (git , podman) ?
+	echo "Agree With Install (git , podman) ?
 Yes [1]
 No & Exit [2]"
 
@@ -125,11 +125,11 @@ No & Exit [2]"
 	sudo dnf update 
     sudo dnf install epel-release podman -y
     sudo dnf install podman-compose git -y
-		echo "Zammad Port? (http=80 But Check If There Any Service Using This Port + Run The Script By Root) :"
+		echo "Zammad Port? (http=80 But Check If There Is Any Service Using This Port + Run The Script By Root Or It Will Forward The Port) :"
 		read -p "===>" Port
 		if [[ $Port -le 1024 ]]; then
 			if [[ "$(id -u)" -eq 0 ]]; then
-				echo "You Can Run Podman Ander Port 1024 Becose You Are Root"
+				echo "You Can Run Podman Under Port 1024 Because You Are Root"
 				sysctl net.ipv4.ip_unprivileged_port_start=$Port
                 echo "Open Port $Port"
                 firewall-cmd --permanent --add-port=$Port/tcp
@@ -142,7 +142,7 @@ No & Exit [2]"
                 exit
 			else
 
-            echo "Cannot Run Podman Ander Port 1024 Becose You Are Not Root
+            echo "Cannot Run Podman Under Port 1024 Because You Are Not Root
 But You Can Forward Port
 Yes (1)
 No & Exit (2)"     
