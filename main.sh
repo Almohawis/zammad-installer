@@ -11,7 +11,7 @@ Ubuntu (2)
 RHEL & ALmaLinux (3)
 Podman (4)
 Docker (5)
-
+Exit (6)
 '''
 
 read -p "==>" OP1
