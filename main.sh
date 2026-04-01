@@ -34,6 +34,10 @@ read -p "==>" OP1
 
 # Debain
 if [[ "$OP1" == "1" ]]; then
+  if [ "$(id -u)" -ne 0 ]; then
+      echo "Re-running with sudo..."
+      exec sudo bash "$0" "$@"
+  fi
   source ./func/debian-apt.sh
   source ./func/elasticsearch-debian.sh
 
@@ -68,6 +72,11 @@ If You Want zammad Using Another Port Edit /etc/nginx/sites-enabled/zammad.conf"
 ########################## DEBIAN
 
 elif [[ "$OP1" == "2" ]]; then
+
+  if [ "$(id -u)" -ne 0 ]; then
+      echo "Re-running with sudo..."
+      exec sudo bash "$0" "$@"
+  fi
   source ./func/elasticsearch-debian.sh
   source ./func/ubuntu-apt.sh
   echo "
@@ -100,6 +109,11 @@ Exit (4)
 
 
 elif [[ "$OP1" == "3" ]]; then
+  if [ "$(id -u)" -ne 0 ]; then
+      echo "Re-running with sudo..."
+      exec sudo bash "$0" "$@"
+  fi
+
   echo "
   RHEL\CentOS\AlmaLinux 8 [1]
   RHEL\CentOS\AlmaLinux 9 [2]
@@ -137,7 +151,7 @@ elif [[ "$OP1" == "4" ]]; then
 elif [[ "$OP1" == "5" ]]; then
   #For Edit ./fucn/docker.sh
   source ./func/docker.sh
-  # IsThereDocker
+  
   DockerDownload
 
 
